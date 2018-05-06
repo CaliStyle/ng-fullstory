@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
+  "name": "ng-fullstory",
+  "version": "1.0.0-beta.13",
+  "licensePath": "LICENSE",
+  "lib": {
+    "entryFile": "public_api.ts",
+    "languageLevel": [ "dom", "es2017" ],
+    "externals": {},
+    "embedded": []
+  }
+}
