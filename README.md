@@ -5,9 +5,7 @@
 [![Build status][ci-image]][ci-url]
 [![Maintenance](https://img.shields.io/maintenance/yes/2018.svg)]()
 
-This is an Fullstory wrapper for Angular 2+ with dependency injection for universal applications.
-
-It supports all documented fullstory methods.
+This is an Fullstory wrapper for Angular 5+ that supports AoT and SSR.
 
 ### BETA VERSION
 
@@ -27,7 +25,7 @@ $ npm install ng-fullstory@latest --save
 
 ### Configuration
 
-1. Import `FullstoryModule` to `app.module.ts`. The module will automatically include the APP_ID instantiation, so you DO NOT need to copy the install script from Fullstory and place it in your `index.html`.
+1. Import `FullstoryModule` to `app.module.ts`.
 
 ```ts
 import { FullstoryModule } from 'ng-fullstory';
@@ -36,8 +34,7 @@ import { FullstoryModule } from 'ng-fullstory';
   imports: [
     ...
     FullstoryModule.forRoot({
-      appId: <your_app_id>, // from your Fullstory config
-      updateOnRouterChange: true // will automatically run `update` on router event changes. Default: `false`
+      fsOrg: <your_fs_org>, // from your Fullstory config
     })
     ...
   ]
@@ -56,20 +53,22 @@ import { Fullstory } from 'ng-fullstory';
   selector: 'app',
   template: `...`
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   constructor(
     public fullstory: Fullstory
   ){}
 
   ngOnInit() {
-    this.fullstory.boot({
-      app_id: <app_id>,
-      // Supports all optional configuration.
-      widget: {
-        "activator": "#fullstory" 
-      }
+    this.fullstory.login({
+      user_id: <user id>,
+      displayName: <user display name>,
+      email: <user email>
     });
   }
+  
+  ngOnDestroy() {
+      this.fullstory.logout();
+    }
 }
 ```
 
@@ -84,7 +83,7 @@ To publish `npm run build:dist && npm publish dist`
 
 
 ### Credits
-Maintained by [Scott Wyatt](https://github.com/scott-wyatt) and [Wilson Hobbs](https://www.twitter.com/wbhob) in 2017 with contributions from [Florian Reifschneider](https://github.com/flore2003), [Devon Sams](https://www.twitter.com/POS1TRON), and [Humberto Rocha](https://github.com/humrochagf)
+Maintained by [Scott Wyatt](https://github.com/scott-wyatt)
 
 
 [ci-image]: https://img.shields.io/circleci/project/github/CaliStyle/ng-fullstory/master.svg
