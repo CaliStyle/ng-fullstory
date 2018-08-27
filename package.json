@@ -51,8 +51,8 @@
   },
   "main": "./dist/server.js",
   "peerDependencies": {
-    "@angular/core": ">=5.0.0 <6.0.0",
-    "@angular/router": ">=5.0.0 <6.0.0"
+    "@angular/core": ">=5.0.0",
+    "@angular/router": ">=5.0.0"
   },
   "devDependencies": {
     "@angular/animations": "^5.2.9",
