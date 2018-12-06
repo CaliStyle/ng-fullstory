@@ -1,0 +1,79 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+
+version: 2
+
+defaults: &defaults
+  working_directory: ~/ng-fullstory
+  docker:
+    - image: circleci/node:8-browsers
+      environment:
+      CHROME_BIN: "/usr/bin/google-chrome"
+
+jobs:
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: update-npm
+          command: 'sudo npm install -g npm@5'
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-npm-wee
+          command: npm install
+      - run:
+          name: install-npm-node-sass
+          command: npm install node-sass
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: test
+          command: npm test
+      - store_artifacts:
+          path: test-results.xml
+          prefix: tests
+      - store_artifacts:
+          path: coverage
+          prefix: coverage
+      - store_test_results:
+          path: test-results.xml
+      - persist_to_workspace:
+          root: ~/ng-fullstory
+          paths: .
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/ng-fullstory
+      - run:
+          name: Build dist
+          command: npm run build:dist
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/ng-fullstory/.npmrc
+      - run:
+          name: Publish package
+          command: npm publish dist
+
+workflows:
+  version: 2
+  test-deploy:
+    jobs:
+      - test:
+          filters:
+            tags:
+              only: /^v.*/
+      - deploy:
+          requires:
+            - test
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
