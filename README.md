@@ -61,7 +61,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.fullstory.login({
       user_id: <user id>,
-      displayName: <user display name>,
+      name: <user display name>,
       email: <user email>
     });
   }
