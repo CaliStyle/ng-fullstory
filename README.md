@@ -3,7 +3,7 @@
 [![npm](https://img.shields.io/npm/v/ng-fullstory.svg)](https://www.npmjs.com/package/ng-fullstory)
 [![npm](https://img.shields.io/npm/dm/ng-fullstory.svg)](https://www.npmjs.com/ng-fullstory)
 [![Build status][ci-image]][ci-url]
-[![Maintenance](https://img.shields.io/maintenance/yes/2018.svg)]()
+[![Maintenance](https://img.shields.io/maintenance/yes/2019.svg)]()
 
 This is an Fullstory wrapper for Angular 5+ that supports AoT and SSR.
 
