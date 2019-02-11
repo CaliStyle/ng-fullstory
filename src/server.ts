@@ -1,5 +1,5 @@
 /**
- * Exports the Trails Server
+ * Exports the Fabrix Server
  */
 
 import 'reflect-metadata'
@@ -8,9 +8,9 @@ import { enableProdMode } from '@angular/core'
 
 enableProdMode()
 
-const TrailsApp = require('trails')
-const trails = require('./trails.config')
-const server = new TrailsApp(trails)
+const FabrixApp = require('fabrix')
+const fabrix = require('./fabrix.config')
+const server = new FabrixApp(fabrix)
 
 server
   .start()

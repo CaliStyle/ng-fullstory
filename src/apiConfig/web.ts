@@ -20,7 +20,7 @@ const DIST_FOLDER = join(process.cwd(), 'dist')
  *
  * Configure the Web Server
  *
- * @see {@link http://trailsjs.io/doc/config/web}
+ * @see {@link https://fabrix.app/doc/config/web}
  */
 export const web = {
   express: express,
@@ -46,18 +46,11 @@ export const web = {
       'addMethods',
       'cookieParser',
       'session',
-      // 'passportInit',
-      // 'passportSession',
-      // 'proxyCartInit',
-      // 'proxyCartSession',
-      // 'proxyCartSessionCart',
-      // 'proxyCartSessionCustomer',
       'bodyParser',
       'compression',
       'methodOverride',
       'poweredBy',
       'www',
-      // 'proxyRouter',
       'router',
       '404',
       '500'
@@ -65,10 +58,6 @@ export const web = {
     /**
      * Middlewares to load for body parsing
      */
-    // bodyParser: [
-    //   bodyParser.json(),
-    //   bodyParser.urlencoded({extended: false})
-    // ],
     bodyParser: bodyParser.json(),
     cookieParser: cookieParser('proxy-engine'),
     compression: require('compression')({
@@ -76,7 +65,7 @@ export const web = {
       threshold: 4096
     }),
     poweredBy: function(req, res, next) {
-      res.set('X-Powered-By', 'Proxy Engine <cali-style.com>')
+      res.set('X-Powered-By', 'Fabrix <fabrix.app>')
       next()
     },
     // proxyRouter: function(req, res, next) {

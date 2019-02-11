@@ -2,6 +2,7 @@ const path = require('path')
 const nodeExternals = require('webpack-node-externals')
 
 module.exports = {
+  context: path.resolve(__dirname, '.'),
   entry: {
     'server': './src/server.ts',
     'server.test': './src/server.test.ts'
@@ -9,13 +10,13 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.js'],
     alias: {
-      'main.server': path.join(__dirname, 'dist', 'server', 'main.bundle.js')
+      'main.server': path.join(__dirname, 'dist', 'server', 'main.js')
     }
   },
   target: 'node',
   externals: [nodeExternals()],
   output: {
-    library: 'trailsApp',
+    library: 'fabrixApp',
     libraryTarget: 'commonjs2',
     path: path.join(__dirname, 'dist'),
     filename: '[name].js'
@@ -29,6 +30,7 @@ module.exports = {
             loader: 'ts-loader',
             options: {
               configFile: 'tsconfig.server.json'
+              // configFile: 'tsconfig.json'
             }
           }
         ]
